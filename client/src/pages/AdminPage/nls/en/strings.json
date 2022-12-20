@@ -1,0 +1,16 @@
+{
+  "ADMIN_PAGE": {
+    "search": "Search",
+    "result": "Patient Consents",
+    "search_label": "Search Patient ID:",
+    "noMatches": "No matches found",
+    "noConcentsFound": "No patient consents found",
+    "table_label": "Consent history",
+    "searchPlaceholder": "Enter a Patient ID",
+    "col_target": "Target",
+    "col_permission": "Permissions Granted",
+    "col_startDate": "Consent Start",
+    "col_endDate": "Consent End",
+    "searching": "Searching patients records..."
+  }
+}

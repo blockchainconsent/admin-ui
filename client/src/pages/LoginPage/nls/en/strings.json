@@ -1,0 +1,12 @@
+{
+  "LOGIN": {
+    "login": "Login",
+    "email": "Email",
+    "email_placeholder": "user@yourcompany.com",
+    "password": "Password",
+    "password_placeholder": "password",
+    "log_in": "Log in",
+    "invalid_auth": "Invalid email address or password.",
+    "forgot_password" : "Forgot Password"
+  }
+}

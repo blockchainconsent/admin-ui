@@ -1,0 +1,43 @@
+/**
+ * Open Blockchain Consent Manager 
+ *
+ * (c) Copyright Merative US L.P. and others 2020-2022 
+ *
+ * SPDX-Licence-Identifier: Apache 2.0
+ */
+
+ html {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  font-size: 16px; // basis for rem
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+
+  body {
+    display: flex;
+    height: inherit;
+    width: 100%;
+
+    .bx--loading-overlay {
+      display: none;
+    }
+
+    // &.loading-indicator {
+    //   .bx--loading-overlay {
+    //     display: flex;
+    //   }
+    // }
+
+    #root {
+      overflow: hidden;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      .main-content {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+      }
+    }
+  }
+}

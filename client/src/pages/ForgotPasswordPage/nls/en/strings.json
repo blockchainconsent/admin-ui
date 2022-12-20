@@ -1,0 +1,13 @@
+{
+  "FORGOT_PASSWORD": {
+    "forgot_password" : "Forgot Password",
+    "email": "Email",
+    "email_placeholder": "user@yourcompany.com",
+    "reset_password" : "Reset Password",
+    "invalid_email": "Invalid email address.",
+    "email_required": "Email is required.",
+    "email_sent_success_msg": "Email sent successfully. Please check your email.",
+    "email_sent_err_msg": "Failed to send email. Try again later",
+    "too_many_req_err_msg": "Too many reset password requests. Please try again after 1 minute."
+  }
+}

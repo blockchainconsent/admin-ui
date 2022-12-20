@@ -1,0 +1,84 @@
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: 'cm-admin-ui'
+fullnameOverride: 'cm-admin-ui'
+
+replicaCount: 1
+
+image:
+  repository: <helm-repo>
+  tag: <helm-tag>
+  pullSecret: regsecret
+  pullPolicy: IfNotPresent
+  # for local development against Minikube registry
+  #pullPolicy: Never
+
+# set the internal and external ports to the assigned ones
+service:
+  type: ClusterIP
+  externalPort: 330xx
+  internalPort: 330xx
+  ssl: disabled
+
+# create an entry for each API endpoint along with their corresponding
+# internal and external ports
+api:
+  simpleConsentApi:
+    url: "null"
+    port: 330xx
+
+configuration:
+  enableHttps: "false"
+  probes: disable
+  secretName : "cm-tls-secret-crt"
+  environment: production
+  environmentName:
+  modulesPath: node_modules
+  cloudant:
+    db:
+    url:
+    iamKey:
+  appId:
+    url:
+    authServerHost:
+    tenantId:
+    clientId:
+    clientSecret:
+
+newRelic:
+  enabled: "false"
+  appName: "null"
+  licenseKey: "null"
+
+ingress:
+  enabled: true
+  tls:
+    - secretName:
+
+cluster:
+  ingress:
+    albId:
+    subdomain:
+    limitRps: 100
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 200m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+annotations:
+  TOOLCHAIN_ID: null
+  GIT_URL: null
+  GIT_BRANCH: null
+  GIT_COMMIT: null
+  USER_NAME: null
+  APPLICATION_VERSION: null

@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+{{ include "chart.labels" . | indent 4 }}
+  annotations:
+    TOOLCHAIN_ID: {{ .Values.annotations.TOOLCHAIN_ID }}
+    GIT_URL: {{ .Values.annotations.GIT_URL }}
+    GIT_BRANCH: {{ .Values.annotations.GIT_BRANCH }}
+    GIT_COMMIT: {{ .Values.annotations.GIT_COMMIT }}
+    USER_NAME: {{ .Values.annotations.USER_NAME }}
+    APPLICATION_VERSION: {{ .Values.annotations.APPLICATION_VERSION }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "chart.name" . }}
+      app.kubernetes.io/name: {{ include "chart.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "chart.name" . }}
+        app.kubernetes.io/name: {{ include "chart.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 60
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecret }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+          - configMapRef:
+              name: {{ template "chart.fullname" . }}-configmap
+          - secretRef:
+              name: {{ template "chart.fullname" . }}-secret
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+          volumeMounts:
+            - name : sslvolume
+              mountPath : "/server/config/tls"
+              readOnly: true
+        {{ if eq .Values.configuration.probes "enabled" }}
+          livenessProbe:
+              initialDelaySeconds: 10
+              periodSeconds: 15
+              timeoutSeconds: 30
+              failureThreshold: 3
+              httpGet:
+                  path: "/ping"
+                  port: {{ .Values.service.internalPort }}
+                  scheme: HTTP
+          readinessProbe:
+              initialDelaySeconds: 10
+              periodSeconds: 15
+              timeoutSeconds: 30
+              successThreshold: 3
+              failureThreshold: 10
+              httpGet:
+                  path: "/ping"
+                  port: {{ .Values.service.internalPort }}
+                  scheme: HTTP
+        {{- end }}
+          securityContext:
+            capabilities:
+              drop:
+                - NET_RAW
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+      volumes:
+      - name: sslvolume
+        secret:
+          secretName: {{ .Values.configuration.secretName }}
+      nodeSelector:
+        worker-type: application

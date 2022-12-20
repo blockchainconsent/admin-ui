@@ -1,0 +1,18 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ template "chart.fullname" . }}-configmap 
+data:
+  NODE_ENV: {{ .Values.configuration.environment }}
+  API_BASE_URL: {{ .Values.api.simpleConsentApi.url }}:{{ .Values.api.simpleConsentApi.port }}
+  SERVER_PORT: '{{ .Values.service.internalPort }}'
+{{ if eq .Values.service.ssl "enabled" }}  
+  HTTPS: "true"
+{{ else }}
+  HTTPS: "false"
+{{ end }}
+  USE_HTTPS: {{ .Values.configuration.enableHttps | quote}}
+  NEW_RELIC_ENABLED: {{ .Values.newRelic.enabled | quote }}
+  NEW_RELIC_APP_NAME: {{ .Values.newRelic.appName | quote }}
+  NEW_RELIC_HIGH_SECURITY: "true"
+  NEW_RELIC_NO_CONFIG_FILE: "true"

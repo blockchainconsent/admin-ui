@@ -1,0 +1,5 @@
+{
+    "key":"1",
+    "headers": {"batchId": "${$.initiate_batch.response.body.id}","test": "interop"}
+}
+    

@@ -1,0 +1,25 @@
+{
+    "key":"1",
+    "value":{
+        "resourceType": "Practitioner", "id": "0000016d-3a85-4cca-0000-000000000140", 
+        "meta": {
+            "lastUpdated": "2020-12-03T19:20:26.543987Z", 
+            "profile": ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-Practitioner"]
+        }, 
+        "identifier": [
+                {"type": {"coding": [
+                    {"system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBIdentifierType", "code": "npi"}
+                    ]}, "system": "http://hl7.org/fhir/sid/us-npi", "value": "320"}
+        ], 
+        "active": true, 
+        "name": [{"family": "Pacocha935", "given": ["Mira443", "B"], "prefix": ["Dr."]}], 
+        "telecom": [{"system": "phone", "value": "4137940000"}], 
+        "address": [
+            {"line": ["759 CHESTNUT STREET"], "city": "SPRINGFIELD", "state": "MA", 
+            "postalCode": "01199", "country": "US"}
+        ], 
+        "gender": "female"
+    },
+    "headers": {"batchId": "${$.initiate_batch.response.body.id}","test": "interop"}
+}
+    

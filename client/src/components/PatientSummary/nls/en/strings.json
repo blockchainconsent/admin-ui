@@ -1,0 +1,8 @@
+{
+  "PATIENT_SUMMARY": {
+    "name": "Name:",
+    "email": "Email:",
+    "patientId": "Patient ID:",
+    "result_heading":"Results" 
+  }
+}
